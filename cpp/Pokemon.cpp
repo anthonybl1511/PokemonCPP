@@ -1,6 +1,6 @@
 #include "Pokemon.h"
 
-Pokemon::Pokemon(string name, string description, string type, int level, int lifepoints, Ability ability1, Ability ability2, Ability ability3, Ability ability4) {
+Pokemon::Pokemon(string name, string description, string type, int level, int lifepoints, bool inPokeball, Ability ability1, Ability ability2, Ability ability3, Ability ability4) {
 	mName = name;
 	mDescription = description;
 	mType = type;
@@ -9,7 +9,8 @@ Pokemon::Pokemon(string name, string description, string type, int level, int li
 	mAbility1 = ability1;
 	mAbility2 = ability2;
 	mAbility3 = ability3;
-	mAbility4 = ability4;
+	mAbility3 = ability4;
+	mInPokeball = inPokeball;
 }
 Pokemon::~Pokemon(){}
 
@@ -19,6 +20,7 @@ string Pokemon::GetType() { return mType; }
 int Pokemon::GetLevel() { return mLevel; }
 int Pokemon::GetLifepoints() { return mLifepoints; }
 vector<Ability> Pokemon::GetAbilities() { return { mAbility1, mAbility2, mAbility3, mAbility4 }; }
+bool Pokemon::GetInPokeball() { return mInPokeball; }
 void Pokemon::AddAbility(Ability ability, int slot) {
 	if (slot == 1) {
 		mAbility1 = ability;
@@ -33,4 +35,5 @@ void Pokemon::AddAbility(Ability ability, int slot) {
 		mAbility4 = ability;
 	}
 }
-void Pokemon::SetLifepoints(int newLifepoints) { mLifepoints = newLifepoints; }
+void Pokemon::SetLifepoints(int lifepoints) { mLifepoints = lifepoints; }
+void Pokemon::SetInPokeball(int inPokeball) { mInPokeball = inPokeball; }
