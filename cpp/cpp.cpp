@@ -21,7 +21,5 @@ int main()
     EarnMoney(bankaccount, 10000);
     cout << "Thank you for the 10 000, now I have " << money;
 
-    Pokemon pikachu = Pokemon::Pokemon("Pikachu", "It's the flagship Pokemon.", "Male", "Electric", 32, 11, 200);
-
-    cout << pikachu.GetName() << endl;
+    
 }

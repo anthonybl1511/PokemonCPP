@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <vector>
+#include "Ability.h"
 
 using namespace std;
 
@@ -8,23 +10,24 @@ class Pokemon
 private:
 	string mName;
 	string mDescription;
-	string mGenre;
 	string mType;
-	float mSize;
-	float mWeight;
+	int mLevel;
 	int mLifepoints;
+	Ability mAbility1;
+	Ability mAbility2;
+	Ability mAbility3;
+	Ability mAbility4;
 
 public:
-	Pokemon(string name, string description, string genre, string type, float size, float weight, int lifepoints);
+	Pokemon(string name, string description, string type, int level, int lifepoints, Ability ability1, Ability ability2, Ability ability3, Ability ability4);
 	~Pokemon();
 	string GetName();
 	string GetDescription();
-	string GetGenre();
 	string GetType();
-	float GetSize();
-	float GetWeight();
+	int GetLevel();
 	int GetLifepoints();
-	void SetName(string newName);
+	vector<Ability> GetAbilities();
+	void AddAbility(Ability ability, int slot);
 	void SetLifepoints(int newLifepoints);
 };
 
