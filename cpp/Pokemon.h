@@ -20,6 +20,7 @@ private:
 	bool mInPokeball;
 
 public:
+	Pokemon();
 	Pokemon(string name, string description, string type, int level, int lifepoints, bool inPokeball, Ability ability1, Ability ability2, Ability ability3, Ability ability4);
 	~Pokemon();
 	string GetName();

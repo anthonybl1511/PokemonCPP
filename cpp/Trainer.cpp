@@ -15,26 +15,41 @@ Trainer::Trainer(string firstName, string lastName, string catchphrase, int mone
 }
 Trainer::~Trainer() {}
 
-string Pokemon::GetName() { return mName; }
-string Pokemon::GetDescription() { return mDescription; }
-string Pokemon::GetType() { return mType; }
-int Pokemon::GetLevel() { return mLevel; }
-int Pokemon::GetLifepoints() { return mLifepoints; }
-vector<Ability> Pokemon::GetAbilities() { return { mAbility1, mAbility2, mAbility3, mAbility4 }; }
-bool Pokemon::GetInPokeball() { return mInPokeball; }
-void Pokemon::AddAbility(Ability ability, int slot) {
+string Trainer::GetFirstName() { return mFirstName; }
+string Trainer::GetLastName() { return mLastName; }
+string Trainer::Introduce() { return mCatchphrase; }
+int Trainer::GetMoney() { return mMoney; }
+int Trainer::GetPokeballs() { return mPokeballs; }
+vector<Pokemon> Trainer::GetPokemons() { return { mPokemon1, mPokemon2, mPokemon3, mPokemon4, mPokemon5, mPokemon6 }; }
+void Trainer::AddPokemon(Pokemon pokemon, int slot) {
 	if (slot == 1) {
-		mAbility1 = ability;
+		mPokemon1 = pokemon;
 	}
 	else if (slot == 2) {
-		mAbility2 = ability;
+		mPokemon2 = pokemon;
 	}
 	else if (slot == 3) {
-		mAbility3 = ability;
+		mPokemon3 = pokemon;
 	}
 	else if (slot == 4) {
-		mAbility4 = ability;
+		mPokemon4 = pokemon;
+	}
+	else if (slot == 5) {
+		mPokemon5 = pokemon;
+	}
+	else if (slot == 6) {
+		mPokemon6 = pokemon;
 	}
 }
-void Pokemon::SetLifepoints(int lifepoints) { mLifepoints = lifepoints; }
-void Pokemon::SetInPokeball(int inPokeball) { mInPokeball = inPokeball; }
+void Trainer::SetMoney(int money) { mMoney = money; }
+void Trainer::SetPokeballs(int pokeballs) { mPokeballs = pokeballs; }
+void Trainer::CapturePokemon(Pokemon pokemon) {
+	if (pokemon.GetLifepoints() < 50) {
+		mPokeballs -= 1;
+		
+		cout << "Which slot? (1-6)\n";
+		int slot;
+		cin >> slot;
+		AddPokemon(pokemon, slot);
+	}
+}

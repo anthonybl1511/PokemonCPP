@@ -25,12 +25,13 @@ public:
 	~Trainer();
 	string GetFirstName();
 	string GetLastName();
-	string GetCatchphrase();
+	string Introduce();
 	int GetMoney();
 	int GetPokeballs();
-	vector<Ability> GetPokemons();
+	vector<Pokemon> GetPokemons();
 	void AddPokemon(Pokemon pokemon, int slot);
 	void SetMoney(int money);
 	void SetPokeballs(int pokeballs);
+	void CapturePokemon(Pokemon pokemon);
 };
 

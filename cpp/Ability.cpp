@@ -1,13 +1,14 @@
 #include "Ability.h"
 
-Ability::Ability(string name, string description, string type, int damages) {
+Ability::Ability(string name, string type, int damages, int energy) {
 	mName = name;
-	mDescription = description;
 	mType = type;
 	mDamages = damages;
+	mEnergy = energy;
 }
 
 string Ability::GetName() { return mName; }
-string Ability::GetDescription() { return mDescription; }
 string Ability::GetType() { return mType; }
 int Ability::GetDamages() { return mDamages; }
+int Ability::GetEnergy() { return mEnergy; }
+void Ability::SetEnergy(int energy) { mEnergy = energy; }

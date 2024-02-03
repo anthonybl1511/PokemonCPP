@@ -8,15 +8,17 @@ class Ability
 {
 private:
 	string mName;
-	string mDescription;
 	string mType;
 	int mDamages;
+	int mEnergy;
 
 public:
-	Ability(string name, string description, string type, int damages);
+	Ability();
+	Ability(string name, string type, int damages, int energy);
 	string GetName();
-	string GetDescription();
 	string GetType();
 	int GetDamages();
+	int GetEnergy();
+	void SetEnergy(int energy);
 };
 
