@@ -29,9 +29,10 @@ public:
 	int GetLevel();
 	int GetLifepoints();
 	vector<Ability> GetAbilities();
-	bool GetInPokeball();
 	void AddAbility(Ability ability, int slot);
 	void SetLifepoints(int lifepoints);
 	void SetInPokeball(int inPokeball);
+	void UseAbility(int slot, Pokemon pokemon);
+	void Rest();
 };
 
