@@ -35,6 +35,7 @@ public:
 	void SetMoney(int money);
 	void SetPokeballs(int pokeballs);
 	void ChallengeTrainer(Trainer trainer);
+	void ChallengePokemon(Pokemon pokemon);
 	void CapturePokemon(Pokemon pokemon);
 	void SetPokemonInBattle(Pokemon pokemon);
 };

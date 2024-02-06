@@ -1,6 +1,6 @@
 #include "Pokemon.h"
 
-Pokemon::Pokemon(string name, string description, string type, int level, int lifepoints, bool inPokeball, Ability ability1, Ability ability2, Ability ability3, Ability ability4) {
+Pokemon::Pokemon(string name, string description, string type, int level, int lifepoints, Ability ability1, Ability ability2, Ability ability3, Ability ability4) {
 	mName = name;
 	mDescription = description;
 	mType = type;
@@ -10,7 +10,6 @@ Pokemon::Pokemon(string name, string description, string type, int level, int li
 	mAbility2 = ability2;
 	mAbility3 = ability3;
 	mAbility3 = ability4;
-	mInPokeball = inPokeball;
 }
 Pokemon::~Pokemon(){}
 
@@ -35,7 +34,6 @@ void Pokemon::AddAbility(Ability ability, int slot) {
 	}
 }
 void Pokemon::SetLifepoints(int lifepoints) { mLifepoints = lifepoints; }
-void Pokemon::SetInPokeball(int inPokeball) { mInPokeball = inPokeball; }
 void Pokemon::UseAbility(int slot, Pokemon pokemon) {
 	if (slot == 1) {
 		if (mAbility1.GetEnergy() > 0) {
