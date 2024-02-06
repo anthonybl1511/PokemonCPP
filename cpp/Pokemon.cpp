@@ -1,6 +1,6 @@
 #include "Pokemon.h"
 
-Pokemon::Pokemon(string name, string description, string type, int level, int lifepoints, Ability ability1, Ability ability2, Ability ability3, Ability ability4) {
+Pokemon::Pokemon(string name, string description, TypeEnum type, int level, int lifepoints, Ability ability1, Ability ability2, Ability ability3, Ability ability4) {
 	mName = name;
 	mDescription = description;
 	mType = type;
@@ -15,7 +15,7 @@ Pokemon::~Pokemon(){}
 
 string Pokemon::GetName() { return mName; }
 string Pokemon::GetDescription() { return mDescription; }
-string Pokemon::GetType() { return mType; }
+TypeEnum Pokemon::GetType() { return mType; }
 int Pokemon::GetLevel() { return mLevel; }
 int Pokemon::GetLifepoints() { return mLifepoints; }
 vector<Ability> Pokemon::GetAbilities() { return { mAbility1, mAbility2, mAbility3, mAbility4 }; }

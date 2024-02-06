@@ -10,7 +10,7 @@ class Pokemon
 private:
 	string mName;
 	string mDescription;
-	string mType;
+	TypeEnum mType;
 	int mLevel;
 	int mLifepoints;
 	Ability mAbility1;
@@ -20,11 +20,11 @@ private:
 
 public:
 	Pokemon();
-	Pokemon(string name, string description, string type, int level, int lifepoints, Ability ability1, Ability ability2, Ability ability3, Ability ability4);
+	Pokemon(string name, string description, TypeEnum type, int level, int lifepoints, Ability ability1, Ability ability2, Ability ability3, Ability ability4);
 	~Pokemon();
 	string GetName();
 	string GetDescription();
-	string GetType();
+	TypeEnum GetType();
 	int GetLevel();
 	int GetLifepoints();
 	vector<Ability> GetAbilities();

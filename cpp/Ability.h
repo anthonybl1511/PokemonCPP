@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include "TypeEnum.h"
 
 using namespace std;
 
@@ -8,15 +9,15 @@ class Ability
 {
 private:
 	string mName;
-	string mType;
+	TypeEnum mType;
 	int mDamages;
 	int mEnergy;
 
 public:
 	Ability();
-	Ability(string name, string type, int damages, int energy);
+	Ability(string name, TypeEnum type, int damages, int energy);
 	string GetName();
-	string GetType();
+	TypeEnum GetType();
 	int GetDamages();
 	int GetEnergy();
 	void SetEnergy(int energy);
