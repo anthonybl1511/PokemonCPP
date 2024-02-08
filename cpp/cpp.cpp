@@ -126,6 +126,17 @@ int main()
         {"Dragonite", "A dragon Pokémon.", TypeEnum::Dragon, 1, 100, abilitiesList[1], abilitiesList[38], abilitiesList[0], abilitiesList[0]},
     };
 
+    vector<Trainer> trainerList = {
+        {"Marie", "Legrand", "Okayyy, let's take a break!", 150, 0, pokemonList[12], pokemonList[24], pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0]},
+        {"John", "Smith", "Time to battle!", 200, 3, pokemonList[3], pokemonList[7], pokemonList[15], pokemonList[0], pokemonList[0], pokemonList[0]},
+        {"Emily", "Jones", "Catch 'em all!", 180, 5, pokemonList[1], pokemonList[10], pokemonList[18], pokemonList[25], pokemonList[0], pokemonList[0]},
+        {"David", "Johnson", "Prepare for defeat!", 220, 2, pokemonList[2], pokemonList[14], pokemonList[20], pokemonList[27], pokemonList[34], pokemonList[0]},
+        {"Sophie", "Brown", "Let's have a friendly battle!", 190, 4, pokemonList[4], pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0]},
+        {"Alex", "Miller", "Onward to victory!", 170, 6, pokemonList[5], pokemonList[11], pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0]},
+        {"Liam", "Wilson", "Challenge accepted!", 210, 1, pokemonList[6], pokemonList[13], pokemonList[21], pokemonList[0], pokemonList[0], pokemonList[0]},
+        {"Olivia", "Davis", "PokePower, activate!", 160, 3, pokemonList[7], pokemonList[15], pokemonList[22], pokemonList[29], pokemonList[36], pokemonList[43]},
+    };
+
     string playerFirstname;
     string playerLastname;
     int choice;
@@ -149,7 +160,6 @@ int main()
     cout << "- 3: Squirtle, a water Pokemon." << endl;
     cout << "Choose the one you want to start with by telling me its number (1, 2 or 3):" << endl;
 
-    
     while (!chosen) {
         cin >> choice;
         if (choice == 1) {
@@ -171,6 +181,7 @@ int main()
             std::cout << "\nInvalid choice." << endl;
         }
     }
+    chosen = false;
     cin.ignore();
     cout << "You can now start your adventure! Here is 100€ and 5 pokeballs for you! Good luck!" << endl;
     cin.ignore();
@@ -179,4 +190,41 @@ int main()
 
 
 
+
+    cout << "You are in the wild, you see a trainer not too far away from you, what do you want to do?" << endl;
+    cout << "- 1: Go in the tall grass to find a Pokemon." << endl;
+    cout << "- 2: Talk to the trainer." << endl;
+    cout << "- 3: Rest for a bit." << endl;
+    cout << "Choose what you want to do (1, 2 or 3):" << endl;
+
+    while (!chosen) {
+        cin >> choice;
+        if (choice == 1) {
+            chosen = true;
+            cout << "As your walking in the tall grass, a Pokemon jumps at you! Prepare to fight!" << endl;
+            srand(time(NULL));
+            int randomPokemonIndex = rand() % 70 + 1;
+            player.ChallengePokemon(pokemonList[randomPokemonIndex]);
+        }
+        else if (choice == 2) {
+            chosen = true;
+            srand(time(NULL));
+            int randomTrainerIndex = rand() % 8 + 1;
+            player.ChallengeTrainer(trainerList[randomTrainerIndex]);
+        }
+        else if (choice == 3) {
+            chosen = true;
+            cout << "TU TU TUDUDU!" << endl;
+            for (Pokemon pokemon : player.GetPokemons()) {
+                pokemon.Rest();
+            }
+            cout << "All your Pokemon are now rested." << endl;
+        }
+        else {
+            std::cout << "\nInvalid choice." << endl;
+        }
+    }
+    chosen = false;
+
+    cout << "GAME OVER";
 }

@@ -1,9 +1,8 @@
 ﻿  cpp.cpp
-  Pokemon.cpp
-  Trainer.cpp
-C:\Users\anthony.boll\Documents\GitHub\CPP\cpp\Trainer.cpp(178,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\anthony.boll\Documents\GitHub\CPP\cpp\Trainer.cpp(384,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating Code...
+C:\Users\anthony.boll\Documents\GitHub\CPP\cpp\cpp.cpp(205,23): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\anthony.boll\Documents\GitHub\CPP\cpp\cpp.cpp(211,23): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+cpp.obj : error LNK2019: unresolved external symbol "public: __cdecl Pokemon::Pokemon(void)" (??0Pokemon@@QEAA@XZ) referenced in function main
+Trainer.obj : error LNK2001: unresolved external symbol "public: __cdecl Pokemon::Pokemon(void)" (??0Pokemon@@QEAA@XZ)
+cpp.obj : error LNK2019: unresolved external symbol "public: __cdecl Trainer::Trainer(void)" (??0Trainer@@QEAA@XZ) referenced in function main
 Pokemon.obj : error LNK2019: unresolved external symbol "public: __cdecl Ability::Ability(void)" (??0Ability@@QEAA@XZ) referenced in function "public: __cdecl Pokemon::Pokemon(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,enum TypeEnum,int,int,class Ability,class Ability,class Ability,class Ability)" (??0Pokemon@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0W4TypeEnum@@HHVAbility@@222@Z)
-Trainer.obj : error LNK2019: unresolved external symbol "public: __cdecl Pokemon::Pokemon(void)" (??0Pokemon@@QEAA@XZ) referenced in function "public: __cdecl Trainer::Trainer(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int,int,class Pokemon,class Pokemon,class Pokemon,class Pokemon,class Pokemon,class Pokemon)" (??0Trainer@@QEAA@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@00HHVPokemon@@11111@Z)
-C:\Users\anthony.boll\Documents\GitHub\CPP\x64\Debug\cpp.exe : fatal error LNK1120: 2 unresolved externals
+C:\Users\anthony.boll\Documents\GitHub\CPP\x64\Debug\cpp.exe : fatal error LNK1120: 3 unresolved externals
