@@ -22,8 +22,7 @@ private:
 	Pokemon mPokemonInBattle;
 
 public:
-	Trainer();
-	Trainer(string firstName, string lastName, string catchphrase, int money, int pokeballs, Pokemon pokemon1, Pokemon pokemon2, Pokemon pokemon3, Pokemon pokemon4, Pokemon pokemon5, Pokemon pokemon6);
+	Trainer(string firstName = "", string lastName = "", string catchphrase = "", int money = 0, int pokeballs = 0, Pokemon pokemon1 = {}, Pokemon pokemon2 = {}, Pokemon pokemon3 = {}, Pokemon pokemon4 = {}, Pokemon pokemon5 = {}, Pokemon pokemon6 = {});
 	~Trainer();
 	string GetFirstName();
 	string GetLastName();

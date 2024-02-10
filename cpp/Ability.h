@@ -14,8 +14,7 @@ private:
 	int mEnergy;
 
 public:
-	Ability();
-	Ability(string name, TypeEnum type, int damages, int energy);
+	Ability(string name = "", TypeEnum type = TypeEnum::Fire, int damages = 0, int energy = 0);
 	string GetName();
 	TypeEnum GetType();
 	int GetDamages();

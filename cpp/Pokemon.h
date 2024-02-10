@@ -19,8 +19,7 @@ private:
 	Ability mAbility4;
 
 public:
-	Pokemon();
-	Pokemon(string name, string description, TypeEnum type, int level, int lifepoints, Ability ability1, Ability ability2, Ability ability3, Ability ability4);
+	Pokemon(string name = "", string description = "", TypeEnum type = TypeEnum::Fire, int level = 0, int lifepoints = 0, Ability ability1 = {}, Ability ability2 = {}, Ability ability3 = {}, Ability ability4 = {});
 	~Pokemon();
 	string GetName();
 	string GetDescription();
