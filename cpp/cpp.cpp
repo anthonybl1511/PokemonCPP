@@ -228,6 +228,4 @@ int main()
         }
         chosen = false;
     }
-
-    cout << "GAME OVER";
 }

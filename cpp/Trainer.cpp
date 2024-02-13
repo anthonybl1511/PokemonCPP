@@ -1,4 +1,5 @@
 #include "Trainer.h"
+#include <string> 
 
 Trainer::Trainer(string firstName, string lastName, string catchphrase, int money, int pokeballs, Pokemon pokemon1, Pokemon pokemon2, Pokemon pokemon3, Pokemon pokemon4, Pokemon pokemon5, Pokemon pokemon6) {
 	mFirstName = firstName;
@@ -313,34 +314,42 @@ void Trainer::ChallengePokemon(Pokemon pokemon) {
 					slotNum++;
 				}
 			}
+			chosen = false;
 			while (!chosen) {
-				string choice;
+				string choice = "";
 				cin >> choice;
 				if (choice == "1" && (mPokemonInBattle.GetAbilities()[0].GetName() != "")) {
 					chosen = true;
 					cout << mPokemonInBattle.GetName() << " uses " << mPokemonInBattle.GetAbilities()[0].GetName() << "!" << endl;
 					mPokemonInBattle.UseAbility(1, pokemon);
+
+					cout << "\n" << pokemon.GetName() << " has now " << pokemon.GetLifepoints() << " PV!" << endl;
 				}
 				else if (choice == "2" && (mPokemonInBattle.GetAbilities()[1].GetName() != "")) {
 					chosen = true;
 					cout << mPokemonInBattle.GetName() << " uses " << mPokemonInBattle.GetAbilities()[1].GetName() << "!" << endl;
 					mPokemonInBattle.UseAbility(2, pokemon);
+
+					cout << "\n" << pokemon.GetName() << " has now " << pokemon.GetLifepoints() << " PV!" << endl;
 				}
 				else if (choice == "3" && (mPokemonInBattle.GetAbilities()[2].GetName() != "")) {
 					chosen = true;
 					cout << mPokemonInBattle.GetName() << " uses " << mPokemonInBattle.GetAbilities()[2].GetName() << "!" << endl;
 					mPokemonInBattle.UseAbility(3, pokemon);
+
+					cout << "\n" << pokemon.GetName() << " has now " << pokemon.GetLifepoints() << " PV!" << endl;
 				}
 				else if (choice == "4" && (mPokemonInBattle.GetAbilities()[3].GetName() != "")) {
 					chosen = true;
 					cout << mPokemonInBattle.GetName() << " uses " << mPokemonInBattle.GetAbilities()[3].GetName() << "!" << endl;
 					mPokemonInBattle.UseAbility(4, pokemon);
+
+					cout << "\n" << pokemon.GetName() << " has now " << pokemon.GetLifepoints() << " PV!" << endl;
 				}
 				else {
 					std::cout << "\nInvalid choice" << endl;
 				}
 			}
-			chosen = false;
 			if (pokemon.GetLifepoints() <= 0) {
 				if (GetPokemons().size() == 6) {
 					cout << pokemon.GetName() << " is KO! Your team is full so you can't capture it, you win the battle!" << endl;
@@ -386,9 +395,9 @@ void Trainer::ChallengePokemon(Pokemon pokemon) {
 			cout << pokemon.GetName() << " is choosing an ability to use..." << endl;
 			chosen = false;
 			while (!chosen) {
-				string pokemonChoice;
+				string pokemonChoice = "";
 				srand(time(NULL));
-				pokemonChoice = rand() % 4 + 1;
+				pokemonChoice = to_string(rand() % 4 + 1);
 				if (pokemonChoice == "1" && (pokemon.GetAbilities()[0].GetName() != "")) {
 					chosen = true;
 					cout << pokemon.GetName() << " uses " << pokemon.GetAbilities()[0].GetName() << "!" << endl;
