@@ -11,43 +11,43 @@ int main()
 {
     vector<Ability> abilitiesList = { 
         {"", TypeEnum::Electric, 0, 0},
-        {"Charge", TypeEnum::Electric, 10, 8},
+        {"Charge", TypeEnum::Electric, 10, 5},
         {"Thunderbolt", TypeEnum::Electric, 20, 5},
-        {"Vine Whip", TypeEnum::Grass, 15, 7},
-        {"Ember", TypeEnum::Fire, 18, 6},
-        {"Bubble Beam", TypeEnum::Water, 12, 8},
-        {"Psychic Blast", TypeEnum::Psychic, 25, 3},
-        {"Ice Beam", TypeEnum::Ice, 22, 4},
-        {"Hyper Beam", TypeEnum::Normal, 30, 3},
-        {"Earthquake", TypeEnum::Ground, 28, 4},
+        {"Vine Whip", TypeEnum::Grass, 15, 5},
+        {"Ember", TypeEnum::Fire, 18, 5},
+        {"Bubble Beam", TypeEnum::Water, 12, 5},
+        {"Psychic Blast", TypeEnum::Psychic, 25, 5},
+        {"Ice Beam", TypeEnum::Ice, 22, 5},
+        {"Hyper Beam", TypeEnum::Normal, 30, 5},
+        {"Earthquake", TypeEnum::Ground, 28, 5},
         {"Shadow Ball", TypeEnum::Ghost, 24, 5},
         {"Solar Beam", TypeEnum::Grass, 35, 3},
         {"Blizzard", TypeEnum::Ice, 32, 5},
         {"Thunder Punch", TypeEnum::Electric, 26, 5},
-        {"Dragon Claw", TypeEnum::Dragon, 28, 6},
-        {"Poison Jab", TypeEnum::Poison, 18, 8},
-        {"Aerial Ace", TypeEnum::Flying, 20, 6},
+        {"Dragon Claw", TypeEnum::Dragon, 28, 5},
+        {"Poison Jab", TypeEnum::Poison, 18, 5},
+        {"Aerial Ace", TypeEnum::Flying, 20, 5},
         {"Water Gun", TypeEnum::Water, 15, 5},
-        {"Flamethrower", TypeEnum::Fire, 28, 4},
+        {"Flamethrower", TypeEnum::Fire, 28, 5},
         {"Psychic Wave", TypeEnum::Psychic, 22, 5},
-        {"Ice Shard", TypeEnum::Ice, 18, 7},
-        {"Tackle", TypeEnum::Normal, 12, 6},
-        {"Mud Slap", TypeEnum::Ground, 20, 4},
-        {"Shadow Punch", TypeEnum::Ghost, 25, 4},
-        {"Leaf Blade", TypeEnum::Grass, 30, 3},
-        {"Toxic", TypeEnum::Poison, 15, 8},
+        {"Ice Shard", TypeEnum::Ice, 18, 5},
+        {"Tackle", TypeEnum::Normal, 12, 5},
+        {"Mud Slap", TypeEnum::Ground, 20, 5},
+        {"Shadow Punch", TypeEnum::Ghost, 25, 5},
+        {"Leaf Blade", TypeEnum::Grass, 30, 5},
+        {"Toxic", TypeEnum::Poison, 15, 5},
         {"Gust", TypeEnum::Flying, 22, 5},
-        {"Thunder Wave", TypeEnum::Electric, 15, 6},
-        {"Solar Flare", TypeEnum::Fire, 32, 3},
-        {"Confusion", TypeEnum::Psychic, 20, 7},
-        {"Frost Breath", TypeEnum::Ice, 25, 6},
+        {"Thunder Wave", TypeEnum::Electric, 15, 5},
+        {"Solar Flare", TypeEnum::Fire, 32, 5},
+        {"Confusion", TypeEnum::Psychic, 20, 5},
+        {"Frost Breath", TypeEnum::Ice, 25, 5},
         {"Crush Claw", TypeEnum::Normal, 28, 5},
-        {"Quicksand", TypeEnum::Ground, 23, 6},
-        {"Spectral Beam", TypeEnum::Ghost, 30, 4},
-        {"Razor Leaf", TypeEnum::Grass, 18, 8},
+        {"Quicksand", TypeEnum::Ground, 23, 5},
+        {"Spectral Beam", TypeEnum::Ghost, 30, 5},
+        {"Razor Leaf", TypeEnum::Grass, 18, 5},
         {"Venomous Bite", TypeEnum::Poison, 25, 5},
-        {"Wing Attack", TypeEnum::Flying, 20, 7},
-        {"Hydro Pump", TypeEnum::Water, 35, 3},
+        {"Wing Attack", TypeEnum::Flying, 20, 5},
+        {"Hydro Pump", TypeEnum::Water, 35, 5},
         {"Dragon Breath", TypeEnum::Dragon, 24, 5},
     };
 
@@ -128,11 +128,8 @@ int main()
 
     vector<Trainer> trainerList = {
         { "", "", "", 100, 5, {} },
-        {"Marie", "Legrand", "Okayyy, let's take a break!", 150, 0, {pokemonList[12], pokemonList[24], pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0]}},
+        {"Maria", "Lagrande", "Okayyy, let's take a break!", 150, 0, {pokemonList[12], pokemonList[24], pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0]}},
         {"John", "Smith", "Time to battle!", 200, 3, {pokemonList[3], pokemonList[7], pokemonList[15], pokemonList[0], pokemonList[0], pokemonList[0]}},
-        {"Emily", "Jones", "Catch 'em all!", 180, 5, {pokemonList[1], pokemonList[10], pokemonList[18], pokemonList[25], pokemonList[0], pokemonList[0]} },
-        {"David", "Johnson", "Prepare for defeat!", 220, 2, {pokemonList[2], pokemonList[14], pokemonList[20], pokemonList[27], pokemonList[34], pokemonList[0]}},
-        {"Sophie", "Brown", "Let's have a friendly battle!", 190, 4, {pokemonList[4], pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0]} },
     };
 
     string playerFirstname;
@@ -213,7 +210,7 @@ int main()
             else if (choice == "2") {
                 chosen = true;
                 srand(time(NULL));
-                int randomTrainerIndex = rand() % 8 + 1;
+                int randomTrainerIndex = rand() % 2 + 1;
 
                 cout << "\nAs soon as you cross the trainer's sight, the battle starts!" << endl;
 

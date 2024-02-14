@@ -73,9 +73,9 @@ void Pokemon::UseAbility(int slot, Pokemon& pokemon) {
 	}
 };
 void Pokemon::Rest() { 
-	mLifepoints = 100; 
-	for (Ability ability : GetAbilities())
-	{
-		ability.SetEnergy(5);
-	}
+	mLifepoints = 100;
+	mAbility1.SetEnergy(5);
+	mAbility2.SetEnergy(5);
+	mAbility3.SetEnergy(5);
+	mAbility4.SetEnergy(5);
 }
