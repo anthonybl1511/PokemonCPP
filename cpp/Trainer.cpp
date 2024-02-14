@@ -1,177 +1,112 @@
 #include "Trainer.h"
 #include <string> 
 
-Trainer::Trainer(string firstName, string lastName, string catchphrase, int money, int pokeballs, Pokemon pokemon1, Pokemon pokemon2, Pokemon pokemon3, Pokemon pokemon4, Pokemon pokemon5, Pokemon pokemon6) {
-	mFirstName = firstName;
-	mLastName = lastName;
-	mCatchphrase = catchphrase;
-	mMoney = money;
-	mPokeballs = pokeballs;
-	mPokemon1 = pokemon1;
-	mPokemon2 = pokemon2;
-	mPokemon3 = pokemon3;
-	mPokemon4 = pokemon4;
-	mPokemon5 = pokemon5;
-	mPokemon6 = pokemon6;
+
+Trainer::Trainer(string firstName, string lastName, string catchphrase, int money, int pokeballs, vector<Pokemon> newPokemons) 
+	: mFirstName(firstName), mLastName(lastName), mCatchphrase(catchphrase), mMoney(money), mPokeballs(pokeballs), Pokemons(newPokemons)
+{
 }
-Trainer::~Trainer() {}
 
 string Trainer::GetFirstName() { return mFirstName; }
 string Trainer::GetLastName() { return mLastName; }
 string Trainer::Introduce() { return mCatchphrase; }
 int Trainer::GetMoney() { return mMoney; }
 int Trainer::GetPokeballs() { return mPokeballs; }
-Pokemon Trainer::GetPokemonInBattle() { return mPokemonInBattle; };
-vector<Pokemon> Trainer::GetPokemons() { return { mPokemon1, mPokemon2, mPokemon3, mPokemon4, mPokemon5, mPokemon6 }; }
-int Trainer::GetPokemonsCount() { 
-	int count = 0;
-
-	for (Pokemon pokemon : GetPokemons()) {
-		if (pokemon.GetName() != "") {
-			count++;
-		}
-	}
-
-	return count;
-}
-void Trainer::AddPokemon(Pokemon pokemon, int slot) {
-	if (slot == 1) {
-		mPokemon1 = pokemon;
-	}
-	else if (slot == 2) {
-		mPokemon2 = pokemon;
-	}
-	else if (slot == 3) {
-		mPokemon3 = pokemon;
-	}
-	else if (slot == 4) {
-		mPokemon4 = pokemon;
-	}
-	else if (slot == 5) {
-		mPokemon5 = pokemon;
-	}
-	else if (slot == 6) {
-		mPokemon6 = pokemon;
-	}
+Pokemon& Trainer::GetPokemonInBattle() { return Pokemons[mPokemonInBattle]; };
+vector<Pokemon> Trainer::GetPokemons() { return { Pokemons }; }
+void Trainer::AddPokemon(Pokemon pokemon) {
+	Pokemons.push_back(pokemon);
 }
 void Trainer::SetMoney(int money) { mMoney = money; }
 void Trainer::SetPokeballs(int pokeballs) { mPokeballs = pokeballs; }
-void Trainer::SetPokemonInBattle(Pokemon pokemon) { mPokemonInBattle = pokemon; };
-void Trainer::CapturePokemon(Pokemon pokemon) {
-	if (pokemon.GetLifepoints() < 50) {
-		mPokeballs -= 1;
-		
-		cout << "Which slot? (1-6)\n";
-		int slot;
-		cin >> slot;
-		AddPokemon(pokemon, slot);
-	}
-}
-void Trainer::ChallengeTrainer(Trainer trainer) {
+void Trainer::SetPokemonInBattle(int pokemon) { mPokemonInBattle = pokemon; };
+
+void Trainer::ChallengeTrainer(Trainer& trainer) {
 	std::cout << "\"" << trainer.Introduce() << "\"" << endl;
 	 
-	std::cout << "Here are your Pokemons:\n";
-	if (mPokemon1.GetName() != "") {
-		std::cout << "Slot 1: " << mPokemon1.GetName() << ", ";
+	std::cout << "\nHere are your Pokemons:" << endl;
+
+	for (int i = 0; i < Pokemons.size(); i++) {
+		std::cout << "Slot " << i + 1 << " : " << Pokemons[i].GetName() << ", ";
 	}
-	if (mPokemon2.GetName() != "") {
-		std::cout << "Slot 2: " << mPokemon2.GetName() << ", ";
-	}
-	if (mPokemon3.GetName() != "") {
-		std::cout << "Slot 3: " << mPokemon3.GetName() << ", ";
-	}
-	if (mPokemon4.GetName() != "") {
-		std::cout << "Slot 4: " << mPokemon4.GetName() << ", ";
-	}
-	if (mPokemon5.GetName() != "") {
-		std::cout << "Slot 5: " << mPokemon5.GetName() << ", ";
-	}
-	if (mPokemon6.GetName() != "") {
-		std::cout << "Slot 6: " << mPokemon6.GetName() << endl;
-	}
+
 	bool chosen = false;
-	int choice;
 	while (!chosen) {
-		std::cout << "\nChoose the Pokemon you want to send first, select it with its slot's number";
+		std::cout << "\nChoose the Pokemon you want to send first, select it with its slot's number:" << endl;
+		int choice;
 		cin >> choice;
-		if (choice == 1 && (mPokemon1.GetName() != "")) {
-			mPokemonInBattle = mPokemon1;
-			chosen = true;
-		}
-		else if (choice == 2 && (mPokemon2.GetName() != "")) {
-			mPokemonInBattle = mPokemon2;
-			chosen = true;
-		}
-		else if (choice == 3 && (mPokemon3.GetName() != "")) {
-			mPokemonInBattle = mPokemon3;
-			chosen = true;
-		}
-		else if (choice == 4 && (mPokemon4.GetName() != "")) {
-			mPokemonInBattle = mPokemon4;
-			chosen = true;
-		}
-		else if (choice == 5 && (mPokemon5.GetName() != "")) {
-			mPokemonInBattle = mPokemon5;
-			chosen = true;
-		}
-		else if (choice == 6 && (mPokemon6.GetName() != "")) {
-			mPokemonInBattle = mPokemon6;
+		if (choice <= Pokemons.size()) {
+			SetPokemonInBattle(choice - 1);
 			chosen = true;
 		}
 		else {
-			std::cout << "\nInvalid choice";
+			std::cout << "\ninvalid choice";
 		}
 	}
 	chosen = false;
 	
 	int KOCount = 0;
-	trainer.SetPokemonInBattle(trainer.GetPokemons()[KOCount]);
+	trainer.SetPokemonInBattle(KOCount);
+
+	cout << "\nYou've chosen " << Pokemons[mPokemonInBattle].GetName() << endl;
+	cout << trainer.GetFirstName() << " " << trainer.GetLastName() << " have chosen " << trainer.GetPokemonInBattle().GetName() << endl;
+	cout << "The battle begins!" << endl;
 
 	string winner;
 	bool playerTurn = true;
 	while (winner != "player" || winner != "trainer")
 	{
-		cout << "\nYou've chosen " << mPokemonInBattle.GetName() << endl;
-		cout << trainer.GetFirstName() << " " << trainer.GetLastName() << "have chosen " << trainer.GetPokemonInBattle().GetName() << endl;
-		cout << "The battle begins!" << endl;
-
 		if (playerTurn) {
-			cout << "It's your turn, choose an ability of " << mPokemonInBattle.GetName() << ":" << endl;
-			for (Ability ability : mPokemonInBattle.GetAbilities()) {
-				cout << "Slot 1: " << ability.GetName() << " (" << ability.GetDamages() << ", " << ability.GetEnergy() << "); " << endl;
+			cout << "\nIt's your turn, choose an ability of " << Pokemons[mPokemonInBattle].GetName() << ": (The stats are [damages, enery])" << endl;
+			int slotNum = 1;
+			for (Ability ability : Pokemons[mPokemonInBattle].GetAbilities()) {
+				if (ability.GetName() != "") {
+					cout << "Slot " << slotNum << ": " << ability.GetName() << " [" << ability.GetDamages() << ", " << ability.GetEnergy() << "]; " << endl;
+					slotNum++;
+				}
 			}
+			chosen = false;
 			while (!chosen) {
+				string choice = "";
 				cin >> choice;
-				if (choice == 1 && (mPokemonInBattle.GetAbilities()[0].GetName() != "")) {
+				if (choice == "1" && (Pokemons[mPokemonInBattle].GetAbilities()[0].GetName() != "")) {
 					chosen = true;
-					cout << mPokemonInBattle.GetName() << " uses " << mPokemonInBattle.GetAbilities()[0].GetName() << "!" << endl;
-					mPokemonInBattle.UseAbility(1, trainer.mPokemonInBattle);
+					cout << "\n" << Pokemons[mPokemonInBattle].GetName() << " uses " << Pokemons[mPokemonInBattle].GetAbilities()[0].GetName() << "!" << endl;
+					Pokemons[mPokemonInBattle].UseAbility(1, trainer.GetPokemonInBattle());
+
+					cout << "\n" << trainer.GetPokemonInBattle().GetName() << " has now " << trainer.GetPokemonInBattle().GetLifepoints() << " PV!" << endl;
 				}
-				else if (choice == 2 && (mPokemonInBattle.GetAbilities()[1].GetName() != "")) {
+				else if (choice == "2" && (Pokemons[mPokemonInBattle].GetAbilities()[1].GetName() != "")) {
 					chosen = true;
-					cout << mPokemonInBattle.GetName() << " uses " << mPokemonInBattle.GetAbilities()[1].GetName() << "!" << endl;
-					mPokemonInBattle.UseAbility(2, trainer.mPokemonInBattle);
+					cout << "\n" << Pokemons[mPokemonInBattle].GetName() << " uses " << Pokemons[mPokemonInBattle].GetAbilities()[1].GetName() << "!" << endl;
+					Pokemons[mPokemonInBattle].UseAbility(2, trainer.GetPokemonInBattle());
+
+					cout << "\n" << trainer.GetPokemonInBattle().GetName() << " has now " << trainer.GetPokemonInBattle().GetLifepoints() << " PV!" << endl;
 				}
-				else if (choice == 3 && (mPokemonInBattle.GetAbilities()[2].GetName() != "")) {
+				else if (choice == "3" && (Pokemons[mPokemonInBattle].GetAbilities()[2].GetName() != "")) {
 					chosen = true;
-					cout << mPokemonInBattle.GetName() << " uses " << mPokemonInBattle.GetAbilities()[2].GetName() << "!" << endl;
-					mPokemonInBattle.UseAbility(3, trainer.mPokemonInBattle);
+					cout << "\n" << Pokemons[mPokemonInBattle].GetName() << " uses " << Pokemons[mPokemonInBattle].GetAbilities()[2].GetName() << "!" << endl;
+					Pokemons[mPokemonInBattle].UseAbility(3, trainer.GetPokemonInBattle());
+
+					cout << "\n" << trainer.GetPokemonInBattle().GetName() << " has now " << trainer.GetPokemonInBattle().GetLifepoints() << " PV!" << endl;
 				}
-				else if (choice == 4 && (mPokemonInBattle.GetAbilities()[3].GetName() != "")) {
+				else if (choice == "4" && (Pokemons[mPokemonInBattle].GetAbilities()[3].GetName() != "")) {
 					chosen = true;
-					cout << mPokemonInBattle.GetName() << " uses " << mPokemonInBattle.GetAbilities()[3].GetName() << "!" << endl;
-					mPokemonInBattle.UseAbility(4, trainer.mPokemonInBattle);
+					cout << "\n" << Pokemons[mPokemonInBattle].GetName() << " uses " << Pokemons[mPokemonInBattle].GetAbilities()[3].GetName() << "!" << endl;
+					Pokemons[mPokemonInBattle].UseAbility(4, trainer.GetPokemonInBattle());
+
+					cout << trainer.GetPokemonInBattle().GetName() << " has now " << trainer.GetPokemonInBattle().GetLifepoints() << " PV!" << endl;
 				}
 				else {
 					std::cout << "\nInvalid choice" << endl;
 				}
 			}
 			chosen = false;
-			if (trainer.mPokemonInBattle.GetLifepoints() <= 0) {
-				cout << trainer.mPokemonInBattle.GetName() << " is KO!" << endl;
+			if (trainer.GetPokemonInBattle().GetLifepoints() <= 0) {
+				cout << trainer.GetPokemonInBattle().GetName() << " is KO!" << endl;
 				KOCount++;
-				if (trainer.GetPokemons()[KOCount].GetName() != "") {
-					trainer.SetPokemonInBattle(trainer.GetPokemons()[KOCount]);
+				if (KOCount+1 <= trainer.Pokemons.size()) {
+					trainer.SetPokemonInBattle(KOCount);
 					cout << trainer.GetFirstName() << " " << trainer.GetLastName() << " sends " << trainer.GetPokemonInBattle().GetName() << " into the battle!" << endl;
 				}
 				else {
@@ -182,7 +117,7 @@ void Trainer::ChallengeTrainer(Trainer trainer) {
 				}
 			}
 		}
-		else {
+		else { // ICIIII
 			cout << trainer.GetFirstName() << " " << trainer.GetLastName() << " is choosing an ability to use..." << endl;
 			chosen = false;
 			int trainerChoice = 0;
@@ -192,26 +127,26 @@ void Trainer::ChallengeTrainer(Trainer trainer) {
 				if (trainerChoice == 1 && (trainer.GetPokemonInBattle().GetAbilities()[0].GetName() != "")) {
 					chosen = true;
 					cout << trainer.GetPokemonInBattle().GetName() << " uses " << trainer.GetPokemonInBattle().GetAbilities()[0].GetName() << "!" << endl;
-					trainer.GetPokemonInBattle().UseAbility(1, mPokemonInBattle);
+					trainer.GetPokemonInBattle().UseAbility(1, GetPokemonInBattle());
 				}
 				else if (trainerChoice == 2 && (trainer.GetPokemonInBattle().GetAbilities()[1].GetName() != "")) {
 					chosen = true;
 					cout << trainer.GetPokemonInBattle().GetName() << " uses " << trainer.GetPokemonInBattle().GetAbilities()[1].GetName() << "!" << endl;
-					trainer.GetPokemonInBattle().UseAbility(2, mPokemonInBattle);
+					trainer.GetPokemonInBattle().UseAbility(2, GetPokemonInBattle());
 				}
 				else if (trainerChoice == 3 && (trainer.GetPokemonInBattle().GetAbilities()[2].GetName() != "")) {
 					chosen = true;
 					cout << trainer.GetPokemonInBattle().GetName() << " uses " << trainer.GetPokemonInBattle().GetAbilities()[2].GetName() << "!" << endl;
-					trainer.GetPokemonInBattle().UseAbility(3, mPokemonInBattle);
+					trainer.GetPokemonInBattle().UseAbility(3, GetPokemonInBattle());
 				}
 				else if (trainerChoice == 4 && (trainer.GetPokemonInBattle().GetAbilities()[3].GetName() != "")) {
 					chosen = true;
 					cout << trainer.GetPokemonInBattle().GetName() << " uses " << trainer.GetPokemonInBattle().GetAbilities()[3].GetName() << "!" << endl;
-					trainer.GetPokemonInBattle().UseAbility(4, mPokemonInBattle);
+					trainer.GetPokemonInBattle().UseAbility(4, GetPokemonInBattle());
 				}
 			}
-			if (mPokemonInBattle.GetLifepoints() <= 0) {
-				cout << mPokemonInBattle.GetName() << " is KO!" << endl;
+			if (GetPokemonInBattle().GetLifepoints() <= 0) {
+				cout << GetPokemonInBattle().GetName() << " is KO!" << endl;
 				bool canContinue = false;
 				for (Pokemon pokemon : GetPokemons()) {
 					if (pokemon.GetLifepoints() > 0) {
@@ -221,28 +156,21 @@ void Trainer::ChallengeTrainer(Trainer trainer) {
 				}
 				if (canContinue) {
 					cout << "You need to send another pokemon in the battle, here are the one(s) that are not KO: " << endl;
-					if (mPokemon1.GetName() != "" && mPokemon1.GetLifepoints() > 0) {
-						std::cout << "Slot 1: " << mPokemon1.GetName() << ", ";
+					int index = 1;
+					for (int i = 0; i < Pokemons.size(); i++) {
+						if (Pokemons[i].GetLifepoints() > 0) {
+							index++;
+							std::cout << "Slot " << index << ": " << Pokemons[i].GetName() << ", " << endl;
+						}
 					}
-					if (mPokemon2.GetName() != "" && mPokemon2.GetLifepoints() > 0) {
-						std::cout << "Slot 2: " << mPokemon2.GetName() << ", ";
-					}
-					if (mPokemon3.GetName() != "" && mPokemon3.GetLifepoints() > 0) {
-						std::cout << "Slot 3: " << mPokemon3.GetName() << ", ";
-					}
-					if (mPokemon4.GetName() != "" && mPokemon4.GetLifepoints() > 0) {
-						std::cout << "Slot 4: " << mPokemon4.GetName() << ", ";
-					}
-					if (mPokemon5.GetName() != "" && mPokemon5.GetLifepoints() > 0) {
-						std::cout << "Slot 5: " << mPokemon5.GetName() << ", ";
-					}
-					if (mPokemon6.GetName() != "" && mPokemon6.GetLifepoints() > 0) {
-						std::cout << "Slot 6: " << mPokemon6.GetName() << endl;
-					}
+					cout << endl;
 				}
 				else {
 					cout << "All your Pokemons are KO, you lose the fight." << endl;
-					cout << "You have lost 100 € from this fight..." << endl;
+					cout << "You have lost 100 € from this fight... You rest immediatly after the fight." << endl;
+					for (int i = 0; i < Pokemons.size(); i++) {
+						Pokemons[i].Rest();
+					}
 					SetMoney(GetMoney() - 100);
 					winner = "trainer";
 				}
@@ -255,55 +183,22 @@ void Trainer::ChallengePokemon(Pokemon pokemon) {
 	cout << pokemon.GetName() << " wants to fight!" << endl;
 
 	std::cout << "\nHere are your Pokemons:" << endl;
-	if (mPokemon1.GetName() != "") {
-		std::cout << "Slot 1: " << mPokemon1.GetName() << ", ";
+
+	for (int i = 0; i < Pokemons.size(); i++) {
+		std::cout << "Slot "<<i +1<<" : " << Pokemons[i].GetName() << ", ";
 	}
-	if (mPokemon2.GetName() != "") {
-		std::cout << "Slot 2: " << mPokemon2.GetName() << ", ";
-	}
-	if (mPokemon3.GetName() != "") {
-		std::cout << "Slot 3: " << mPokemon3.GetName() << ", ";
-	}
-	if (mPokemon4.GetName() != "") {
-		std::cout << "Slot 4: " << mPokemon4.GetName() << ", ";
-	}
-	if (mPokemon5.GetName() != "") {
-		std::cout << "Slot 5: " << mPokemon5.GetName() << ", ";
-	}
-	if (mPokemon6.GetName() != "") {
-		std::cout << "Slot 6: " << mPokemon6.GetName() << endl;
-	}
+
 	bool chosen = false;
 	while (!chosen) {
 		std::cout << "\nChoose the Pokemon you want to send first, select it with its slot's number:" << endl;
-		string choice;
+		int choice;
 		cin >> choice;
-		if (choice == "1" && (mPokemon1.GetName() != "")) {
-			mPokemonInBattle = mPokemon1;
-			chosen = true;
-		}
-		else if (choice == "2" && (mPokemon2.GetName() != "")) {
-			mPokemonInBattle = mPokemon2;
-			chosen = true;
-		}
-		else if (choice == "3" && (mPokemon3.GetName() != "")) {
-			mPokemonInBattle = mPokemon3;
-			chosen = true;
-		}
-		else if (choice == "4" && (mPokemon4.GetName() != "")) {
-			mPokemonInBattle = mPokemon4;
-			chosen = true;
-		}
-		else if (choice == "5" && (mPokemon5.GetName() != "")) {
-			mPokemonInBattle = mPokemon5;
-			chosen = true;
-		}
-		else if (choice == "6" && (mPokemon6.GetName() != "")) {
-			mPokemonInBattle = mPokemon6;
+		if (choice <= Pokemons.size()) {
+			SetPokemonInBattle(choice -1);
 			chosen = true;
 		}
 		else {
-			std::cout << "\nInvalid choice";
+			std::cout << "\ninvalid choice";
 		}
 	}
 	chosen = false;
@@ -311,15 +206,16 @@ void Trainer::ChallengePokemon(Pokemon pokemon) {
 	string winner;
 	bool playerTurn = true;
 
-	cout << "\nYou've chosen " << mPokemonInBattle.GetName() << "." << endl;
+	cout << "\nYou've chosen " << Pokemons[mPokemonInBattle].GetName() << "." << endl;
 	cout << "The battle begins!" << endl;
 
-	while (winner != "player" || winner != "pokemon")
+
+	while (winner != "player" && winner != "pokemon")
 	{
 		if (playerTurn) {
-			cout << "\nIt's your turn, choose an ability of " << mPokemonInBattle.GetName() << ": (The stats are [damages, enery])" << endl;
+			cout << "\nIt's your turn, choose an ability of " << Pokemons[mPokemonInBattle].GetName() << ": (The stats are [damages, enery])" << endl;
 			int slotNum = 1;
-			for (Ability ability : mPokemonInBattle.GetAbilities()) {
+			for (Ability ability : Pokemons[mPokemonInBattle].GetAbilities()) {
 				if (ability.GetName() != "") {
 					cout << "Slot " << slotNum << ": " << ability.GetName() << " [" << ability.GetDamages() << ", " << ability.GetEnergy() << "]; " << endl;
 					slotNum++;
@@ -329,31 +225,31 @@ void Trainer::ChallengePokemon(Pokemon pokemon) {
 			while (!chosen) {
 				string choice = "";
 				cin >> choice;
-				if (choice == "1" && (mPokemonInBattle.GetAbilities()[0].GetName() != "")) {
+				if (choice == "1" && (Pokemons[mPokemonInBattle].GetAbilities()[0].GetName() != "")) {
 					chosen = true;
-					cout << "\n" << mPokemonInBattle.GetName() << " uses " << mPokemonInBattle.GetAbilities()[0].GetName() << "!" << endl;
-					mPokemonInBattle.UseAbility(1, pokemon);
+					cout << "\n" << Pokemons[mPokemonInBattle].GetName() << " uses " << Pokemons[mPokemonInBattle].GetAbilities()[0].GetName() << "!" << endl;
+					Pokemons[mPokemonInBattle].UseAbility(1, pokemon);
 
 					cout << "\n" << pokemon.GetName() << " has now " << pokemon.GetLifepoints() << " PV!" << endl;
 				}
-				else if (choice == "2" && (mPokemonInBattle.GetAbilities()[1].GetName() != "")) {
+				else if (choice == "2" && (Pokemons[mPokemonInBattle].GetAbilities()[1].GetName() != "")) {
 					chosen = true;
-					cout << "\n" << mPokemonInBattle.GetName() << " uses " << mPokemonInBattle.GetAbilities()[1].GetName() << "!" << endl;
-					mPokemonInBattle.UseAbility(2, pokemon);
+					cout << "\n" << Pokemons[mPokemonInBattle].GetName() << " uses " << Pokemons[mPokemonInBattle].GetAbilities()[1].GetName() << "!" << endl;
+					Pokemons[mPokemonInBattle].UseAbility(2, pokemon);
 
 					cout << "\n" << pokemon.GetName() << " has now " << pokemon.GetLifepoints() << " PV!" << endl;
 				}
-				else if (choice == "3" && (mPokemonInBattle.GetAbilities()[2].GetName() != "")) {
+				else if (choice == "3" && (Pokemons[mPokemonInBattle].GetAbilities()[2].GetName() != "")) {
 					chosen = true;
-					cout << "\n" << mPokemonInBattle.GetName() << " uses " << mPokemonInBattle.GetAbilities()[2].GetName() << "!" << endl;
-					mPokemonInBattle.UseAbility(3, pokemon);
+					cout << "\n" << Pokemons[mPokemonInBattle].GetName() << " uses " << Pokemons[mPokemonInBattle].GetAbilities()[2].GetName() << "!" << endl;
+					Pokemons[mPokemonInBattle].UseAbility(3, pokemon);
 
 					cout << "\n" << pokemon.GetName() << " has now " << pokemon.GetLifepoints() << " PV!" << endl;
 				}
-				else if (choice == "4" && (mPokemonInBattle.GetAbilities()[3].GetName() != "")) {
+				else if (choice == "4" && (Pokemons[mPokemonInBattle].GetAbilities()[3].GetName() != "")) {
 					chosen = true;
-					cout << "\n" << mPokemonInBattle.GetName() << " uses " << mPokemonInBattle.GetAbilities()[3].GetName() << "!" << endl;
-					mPokemonInBattle.UseAbility(4, pokemon);
+					cout << "\n" << Pokemons[mPokemonInBattle].GetName() << " uses " << Pokemons[mPokemonInBattle].GetAbilities()[3].GetName() << "!" << endl;
+					Pokemons[mPokemonInBattle].UseAbility(4, pokemon);
 
 					cout << pokemon.GetName() << " has now " << pokemon.GetLifepoints() << " PV!" << endl;
 				}
@@ -362,7 +258,7 @@ void Trainer::ChallengePokemon(Pokemon pokemon) {
 				}
 			}
 			if (pokemon.GetLifepoints() <= 0) {
-				if (GetPokemonsCount() > 5) {
+				if (Pokemons.size() > 5) {
 					cout << pokemon.GetName() << " is KO! Your team is full so you can't capture it, you win the battle!" << endl;
 					winner = "player";
 					break;
@@ -385,16 +281,8 @@ void Trainer::ChallengePokemon(Pokemon pokemon) {
 					if (answer == "1") {
 						if (GetPokeballs() > 0) {
 							cout << "You captured " << pokemon.GetName() << ", congratulations!" << endl;
-							SetPokeballs(GetPokeballs() - 1);
-							
-							int slot = 0;
-							for (Pokemon pokemon : GetPokemons()) {
-								if (pokemon.GetName() == "") {
-									AddPokemon(pokemon, slot);
-									break;
-								}
-								slot++;
-							}
+							SetPokeballs(GetPokeballs() - 1);		
+							AddPokemon(pokemon);
 						}
 						else {
 							cout << "You don't have any pokeballs! The battle ends here." << endl;
@@ -409,40 +297,51 @@ void Trainer::ChallengePokemon(Pokemon pokemon) {
 		else {
 			chosen = false;
 			while (!chosen) {
-				string pokemonChoice = "";
+				int pokemonChoice = 0;
 				srand(time(NULL));
-				pokemonChoice = to_string(rand() % 4 + 1);
-				if (pokemonChoice == "1" && (pokemon.GetAbilities()[0].GetName() != "")) {
+				int abilitiesAvailable = 0;
+				for (int i = 0; i < 4; i++) {
+					if (pokemon.GetAbilities()[i].GetName() != "") {
+						abilitiesAvailable++;
+					}
+				}
+				if (abilitiesAvailable > 1) {
+					pokemonChoice = rand() % abilitiesAvailable + 1;
+				}
+				else {
+					pokemonChoice = 1;
+				}
+				if (pokemonChoice == 1) {
 					chosen = true;
 					cout << "\n" << pokemon.GetName() << " uses " << pokemon.GetAbilities()[0].GetName() << "!" << endl;
-					pokemon.UseAbility(1, mPokemonInBattle);
+					pokemon.UseAbility(1, Pokemons[mPokemonInBattle]);
 
-					cout << "\n" << mPokemonInBattle.GetName() << " has now " << mPokemonInBattle.GetLifepoints() << " PV!" << endl;
+					cout << "\n" << Pokemons[mPokemonInBattle].GetName() << " has now " << Pokemons[mPokemonInBattle].GetLifepoints() << " PV!" << endl;
 				}
-				else if (pokemonChoice == "2" && (pokemon.GetAbilities()[1].GetName() != "")) {
+				else if (pokemonChoice == 2) {
 					chosen = true;
 					cout << "\n" << pokemon.GetName() << " uses " << pokemon.GetAbilities()[1].GetName() << "!" << endl;
-					pokemon.UseAbility(2, mPokemonInBattle);
+					pokemon.UseAbility(2, Pokemons[mPokemonInBattle]);
 
-					cout << "\n" << mPokemonInBattle.GetName() << " has now " << mPokemonInBattle.GetLifepoints() << " PV!" << endl;
+					cout << "\n" << Pokemons[mPokemonInBattle].GetName() << " has now " << Pokemons[mPokemonInBattle].GetLifepoints() << " PV!" << endl;
 				}
-				else if (pokemonChoice == "3" && (pokemon.GetAbilities()[2].GetName() != "")) {
+				else if (pokemonChoice == 3) {
 					chosen = true;
 					cout << "\n" << pokemon.GetName() << " uses " << pokemon.GetAbilities()[2].GetName() << "!" << endl;
-					pokemon.UseAbility(3, mPokemonInBattle);
+					pokemon.UseAbility(3, Pokemons[mPokemonInBattle]);
 
-					cout << "\n" << mPokemonInBattle.GetName() << " has now " << mPokemonInBattle.GetLifepoints() << " PV!" << endl;
+					cout << "\n" << Pokemons[mPokemonInBattle].GetName() << " has now " << Pokemons[mPokemonInBattle].GetLifepoints() << " PV!" << endl;
 				}
-				else if (pokemonChoice == "4" && (pokemon.GetAbilities()[3].GetName() != "")) {
+				else if (pokemonChoice == 4) {
 					chosen = true;
 					cout << "\n" << pokemon.GetName() << " uses " << pokemon.GetAbilities()[3].GetName() << "!" << endl;
-					pokemon.UseAbility(4, mPokemonInBattle);
+					pokemon.UseAbility(4, Pokemons[mPokemonInBattle]);
 
-					cout << mPokemonInBattle.GetName() << " has now " << mPokemonInBattle.GetLifepoints() << " PV!" << endl;
+					cout << Pokemons[mPokemonInBattle].GetName() << " has now " << Pokemons[mPokemonInBattle].GetLifepoints() << " PV!" << endl;
 				}
 			}
-			if (mPokemonInBattle.GetLifepoints() <= 0) {
-				cout << mPokemonInBattle.GetName() << " is KO!" << endl;
+			if (Pokemons[mPokemonInBattle].GetLifepoints() <= 0) {
+				cout << Pokemons[mPokemonInBattle].GetName() << " is KO!" << endl;
 				bool canContinue = false;
 				for (Pokemon pokemon : GetPokemons()) {
 					if (pokemon.GetLifepoints() > 0) {
@@ -453,27 +352,19 @@ void Trainer::ChallengePokemon(Pokemon pokemon) {
 				}
 				if (canContinue) {
 					cout << "You need to send another pokemon in the battle, here are the one(s) that are not KO: " << endl;
-					if (mPokemon1.GetName() != "" && mPokemon1.GetLifepoints() > 0) {
-						std::cout << "Slot 1: " << mPokemon1.GetName() << ", ";
-					}
-					if (mPokemon2.GetName() != "" && mPokemon2.GetLifepoints() > 0) {
-						std::cout << "Slot 2: " << mPokemon2.GetName() << ", ";
-					}
-					if (mPokemon3.GetName() != "" && mPokemon3.GetLifepoints() > 0) {
-						std::cout << "Slot 3: " << mPokemon3.GetName() << ", ";
-					}
-					if (mPokemon4.GetName() != "" && mPokemon4.GetLifepoints() > 0) {
-						std::cout << "Slot 4: " << mPokemon4.GetName() << ", ";
-					}
-					if (mPokemon5.GetName() != "" && mPokemon5.GetLifepoints() > 0) {
-						std::cout << "Slot 5: " << mPokemon5.GetName() << ", ";
-					}
-					if (mPokemon6.GetName() != "" && mPokemon6.GetLifepoints() > 0) {
-						std::cout << "Slot 6: " << mPokemon6.GetName() << endl;
+					int index = 0;
+					for (int i = 0; i < Pokemons.size(); i++) {
+						if (Pokemons[i].GetLifepoints() > 0) {
+							index++;
+							std::cout << "Slot " << i << ": " << Pokemons[i].GetName() << ", ";
+						}
 					}
 				}
 				else {
-					cout << "All your Pokemons are KO, you need to run away!" << endl;
+					cout << "All your Pokemons are KO, you need to run away and forced to rest!" << endl;
+					for (int i = 0; i < Pokemons.size(); i++) {
+						Pokemons[i].Rest();
+					}
 					winner = "pokemon";
 				}
 			}

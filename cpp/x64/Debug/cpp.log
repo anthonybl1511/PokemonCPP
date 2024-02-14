@@ -1,4 +1,4 @@
 ﻿  Trainer.cpp
-J:\Téléchargements\CPP\cpp\Trainer.cpp(190,15): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
-J:\Téléchargements\CPP\cpp\Trainer.cpp(413,15): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
-  cpp.vcxproj -> J:\Téléchargements\CPP\x64\Debug\cpp.exe
+C:\Users\anthony.boll\Documents\GitHub\CPP\cpp\Trainer.cpp(112,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\anthony.boll\Documents\GitHub\CPP\cpp\Trainer.cpp(288,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  cpp.vcxproj -> C:\Users\anthony.boll\Documents\GitHub\CPP\x64\Debug\cpp.exe

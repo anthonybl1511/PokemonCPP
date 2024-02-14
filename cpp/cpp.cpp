@@ -127,25 +127,26 @@ int main()
     };
 
     vector<Trainer> trainerList = {
-        {"Marie", "Legrand", "Okayyy, let's take a break!", 150, 0, pokemonList[12], pokemonList[24], pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0]},
-        {"John", "Smith", "Time to battle!", 200, 3, pokemonList[3], pokemonList[7], pokemonList[15], pokemonList[0], pokemonList[0], pokemonList[0]},
-        {"Emily", "Jones", "Catch 'em all!", 180, 5, pokemonList[1], pokemonList[10], pokemonList[18], pokemonList[25], pokemonList[0], pokemonList[0]},
-        {"David", "Johnson", "Prepare for defeat!", 220, 2, pokemonList[2], pokemonList[14], pokemonList[20], pokemonList[27], pokemonList[34], pokemonList[0]},
-        {"Sophie", "Brown", "Let's have a friendly battle!", 190, 4, pokemonList[4], pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0]},
-        {"Alex", "Miller", "Onward to victory!", 170, 6, pokemonList[5], pokemonList[11], pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0]},
-        {"Liam", "Wilson", "Challenge accepted!", 210, 1, pokemonList[6], pokemonList[13], pokemonList[21], pokemonList[0], pokemonList[0], pokemonList[0]},
-        {"Olivia", "Davis", "PokePower, activate!", 160, 3, pokemonList[7], pokemonList[15], pokemonList[22], pokemonList[29], pokemonList[36], pokemonList[43]},
+        { "", "", "", 100, 5, {} },
+        {"Marie", "Legrand", "Okayyy, let's take a break!", 150, 0, {pokemonList[12], pokemonList[24], pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0]}},
+        {"John", "Smith", "Time to battle!", 200, 3, {pokemonList[3], pokemonList[7], pokemonList[15], pokemonList[0], pokemonList[0], pokemonList[0]}},
+        {"Emily", "Jones", "Catch 'em all!", 180, 5, {pokemonList[1], pokemonList[10], pokemonList[18], pokemonList[25], pokemonList[0], pokemonList[0]} },
+        {"David", "Johnson", "Prepare for defeat!", 220, 2, {pokemonList[2], pokemonList[14], pokemonList[20], pokemonList[27], pokemonList[34], pokemonList[0]}},
+        {"Sophie", "Brown", "Let's have a friendly battle!", 190, 4, {pokemonList[4], pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0]} },
     };
 
     string playerFirstname;
     string playerLastname;
     string choice;
     Pokemon chosenPokemon;
-    Trainer player;
+    Trainer player = trainerList[0];
     bool chosen = false;
     bool gameActive = true;
+    
 
-    cout << "Hello yound trainer, welcome to the world of Pokemon! I'm professor Oak and I will introduce you to the basics of this world." << endl;
+
+    // GAME START
+    cout << "Hello young trainer, welcome to the world of Pokemon! I'm professor Oak and I will introduce you to the basics of this world." << endl;
     cin.ignore();
 
     cout << "First what is your firstname? Type it in the console below." << endl;
@@ -160,6 +161,7 @@ int main()
     cout << "- 3: Squirtle, a water Pokemon." << endl;
     cout << "Choose the one you want to start with by telling me its number (1, 2 or 3):" << endl;
 
+    // Start pokemon choice
     while (!chosen) {
         cin >> choice;
         if (choice == "1") {
@@ -181,14 +183,15 @@ int main()
             std::cout << "Invalid choice." << endl;
         }
     }
+    player.AddPokemon(chosenPokemon);
     chosen = false;
     cin.ignore();
     cout << "You can now start your adventure! Here is 100$ and 5 pokeballs for you! Good luck!" << endl;
     cin.ignore();
 
-    player = { playerFirstname, playerLastname, "", 100, 5, chosenPokemon, pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0], pokemonList[0] };
 
 
+    // GAME LOOP
     while (gameActive) {
         cout << "\n\nYou are in the wild, you see a trainer not too far away from you, what do you want to do?" << endl;
         cout << "- 1: Go in the tall grass to find a Pokemon." << endl;
@@ -196,6 +199,8 @@ int main()
         cout << "- 3: Rest for a bit." << endl;
         cout << "Choose what you want to do (1, 2 or 3):" << endl;
 
+
+        // Action choice
         while (!chosen) {
             cin >> choice;
             if (choice == "1") {

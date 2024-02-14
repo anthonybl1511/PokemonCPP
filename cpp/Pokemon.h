@@ -25,10 +25,10 @@ public:
 	string GetDescription();
 	TypeEnum GetType();
 	int GetLevel();
-	int GetLifepoints();
+	int& GetLifepoints();
 	vector<Ability> GetAbilities();
 	void AddAbility(Ability ability, int slot);
-	void SetLifepoints(int lifepoints);
+	void SetLifepoints(int& lifepoints);
 	void UseAbility(int slot, Pokemon& pokemon);
 	void Rest();
 };

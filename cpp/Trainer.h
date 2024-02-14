@@ -13,31 +13,23 @@ private:
 	string mCatchphrase;
 	int mMoney;
 	int mPokeballs;
-	Pokemon mPokemon1;
-	Pokemon mPokemon2;
-	Pokemon mPokemon3;
-	Pokemon mPokemon4;
-	Pokemon mPokemon5;
-	Pokemon mPokemon6;
-	Pokemon mPokemonInBattle;
+	vector<Pokemon> Pokemons;
+	int mPokemonInBattle;
 
 public:
-	Trainer(string firstName = "", string lastName = "", string catchphrase = "", int money = 0, int pokeballs = 0, Pokemon pokemon1 = {}, Pokemon pokemon2 = {}, Pokemon pokemon3 = {}, Pokemon pokemon4 = {}, Pokemon pokemon5 = {}, Pokemon pokemon6 = {});
-	~Trainer();
+	Trainer(string firstName, string lastName, string catchphrase, int money, int pokeballs, vector<Pokemon> newPokemons);
 	string GetFirstName();
 	string GetLastName();
 	string Introduce();
 	int GetMoney();
 	int GetPokeballs();
 	vector<Pokemon> GetPokemons();
-	Pokemon GetPokemonInBattle();
-	int GetPokemonsCount();
-	void AddPokemon(Pokemon pokemon, int slot);
+	Pokemon& GetPokemonInBattle();
+	void AddPokemon(Pokemon pokemon);
 	void SetMoney(int money);
 	void SetPokeballs(int pokeballs);
-	void ChallengeTrainer(Trainer trainer);
+	void ChallengeTrainer(Trainer& trainer);
 	void ChallengePokemon(Pokemon pokemon);
-	void CapturePokemon(Pokemon pokemon);
-	void SetPokemonInBattle(Pokemon pokemon);
+	void SetPokemonInBattle(int pokemon);
 };
 
