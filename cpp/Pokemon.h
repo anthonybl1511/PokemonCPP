@@ -29,7 +29,7 @@ public:
 	vector<Ability> GetAbilities();
 	void AddAbility(Ability ability, int slot);
 	void SetLifepoints(int lifepoints);
-	void UseAbility(int slot, Pokemon pokemon);
+	void UseAbility(int slot, Pokemon& pokemon);
 	void Rest();
 };
 

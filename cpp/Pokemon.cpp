@@ -34,7 +34,7 @@ void Pokemon::AddAbility(Ability ability, int slot) {
 	}
 }
 void Pokemon::SetLifepoints(int lifepoints) { mLifepoints = lifepoints; }
-void Pokemon::UseAbility(int slot, Pokemon pokemon) {
+void Pokemon::UseAbility(int slot, Pokemon& pokemon) {
 	if (slot == 1) {
 		if (mAbility1.GetEnergy() > 0) {
 			pokemon.SetLifepoints(pokemon.GetLifepoints() - mAbility1.GetDamages());

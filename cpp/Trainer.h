@@ -31,6 +31,7 @@ public:
 	int GetPokeballs();
 	vector<Pokemon> GetPokemons();
 	Pokemon GetPokemonInBattle();
+	int GetPokemonsCount();
 	void AddPokemon(Pokemon pokemon, int slot);
 	void SetMoney(int money);
 	void SetPokeballs(int pokeballs);
